@@ -1,0 +1,14 @@
+include ':app'
+
+def capacitorModules = [
+    ':capacitor-android',
+    ':capacitor-cordova-android-plugins',
+]
+
+capacitorModules.forEach { module ->
+    include module
+    project(module).projectDir = new File(rootDir, "../node_modules/@capacitor/android/capacitor${module.replace(':capacitor-android', '').replace(':', '/')}")
+}
+
+project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android/capacitor')
+project(':capacitor-cordova-android-plugins').projectDir = new File('../capacitor-cordova-android-plugins/')

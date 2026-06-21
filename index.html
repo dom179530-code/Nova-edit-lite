@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Nova Edit Lite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="src/css/main.css" />
+  <link rel="stylesheet" href="src/css/animations.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- TOP HEADER -->
+  <header class="app-header glass" id="appHeader">
+    <div class="header-left">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="url(#lg1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="var(--accent)"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient></defs>
+          </svg>
+        </div>
+        <span class="logo-text">Nova<span class="logo-accent">Edit</span></span>
+      </div>
+    </div>
+    <div class="header-center" id="headerTitle"><span>Home</span></div>
+    <div class="header-right">
+      <button class="icon-btn" id="searchBtn" title="Search (/)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="icon-btn" id="themeBtn" title="Toggle Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="themeIconDark"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="themeIconLight" class="hidden"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="search-overlay hidden" id="searchOverlay">
+    <div class="search-box glass">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="searchInput" placeholder="Search projects, features..." autocomplete="off" />
+      <button class="icon-btn" id="searchClose">✕</button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content" id="mainContent">
+
+    <!-- ===== HOME SCREEN ===== -->
+    <section class="screen active" id="screen-home">
+      <div class="hero-banner">
+        <div class="hero-orbs">
+          <div class="orb orb-1"></div>
+          <div class="orb orb-2"></div>
+          <div class="orb orb-3"></div>
+        </div>
+        <div class="hero-content">
+          <div class="hero-badge">✨ Professional Editor</div>
+          <h1 class="hero-title">Edit Like a Pro<br/><span class="gradient-text">No Limits.</span></h1>
+          <p class="hero-sub">Photo &amp; Video editing in your browser. No uploads needed.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="app.navigate('photo')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              Photo Editor
+            </button>
+            <button class="btn btn-secondary" onclick="app.navigate('video')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+              Video Editor
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="section-wrap">
+        <div class="section-header">
+          <h2 class="section-title">Quick Start</h2>
+        </div>
+        <div class="quick-grid">
+          <button class="quick-card glass" onclick="app.navigate('photo'); setTimeout(()=>document.getElementById('photoImportBtn').click(),300)">
+            <div class="quick-icon" style="background:linear-gradient(135deg,#a78bfa,#7c3aed)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+            <span>Edit Photo</span>
+          </button>
+          <button class="quick-card glass" onclick="app.navigate('video'); setTimeout(()=>document.getElementById('videoImportBtn').click(),300)">
+            <div class="quick-icon" style="background:linear-gradient(135deg,#38bdf8,#0284c7)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            </div>
+            <span>Edit Video</span>
+          </button>
+          <button class="quick-card glass" onclick="app.navigate('projects')">
+            <div class="quick-icon" style="background:linear-gradient(135deg,#34d399,#059669)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <span>Projects</span>
+          </button>
+          <button class="quick-card glass" onclick="app.navigate('settings')">
+            <div class="quick-icon" style="background:linear-gradient(135deg,#fb923c,#ea580c)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M4.93 4.93l1.41 1.41M20 12h2M2 12h2M12 20v2M12 2v2"/></svg>
+            </div>
+            <span>Settings</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Recent Projects -->
+      <div class="section-wrap">
+        <div class="section-header">
+          <h2 class="section-title">Recent Projects</h2>
+          <button class="text-btn" onclick="app.navigate('projects')">See all →</button>
+        </div>
+        <div id="homeRecentList">
+          <div class="empty-state glass">
+            <div class="empty-icon">🎨</div>
+            <p>No recent projects yet.<br/>Start editing to see them here!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="section-wrap">
+        <div class="section-header"><h2 class="section-title">Features</h2></div>
+        <div class="features-grid">
+          <div class="feature-card glass"><span class="feat-icon">🎨</span><div><strong>25+ Photo Tools</strong><p>Filters, adjustments &amp; overlays</p></div></div>
+          <div class="feature-card glass"><span class="feat-icon">🎬</span><div><strong>Video Timeline</strong><p>Trim, speed, text &amp; transitions</p></div></div>
+          <div class="feature-card glass"><span class="feat-icon">💾</span><div><strong>Auto Save</strong><p>Projects saved locally, no cloud</p></div></div>
+          <div class="feature-card glass"><span class="feat-icon">📱</span><div><strong>Mobile Ready</strong><p>Touch gestures &amp; responsive UI</p></div></div>
+        </div>
+      </div>
+
+      <div class="section-wrap">
+        <div class="shortcuts-banner glass">
+          <span style="font-size:20px">⌨️</span>
+          <div>
+            <strong>Keyboard Shortcuts</strong>
+            <p>Ctrl+Z Undo &bull; Ctrl+Y Redo &bull; / Search &bull; Esc Close</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PHOTO EDITOR SCREEN ===== -->
+    <section class="screen" id="screen-photo">
+      <!-- Toolbar -->
+      <div class="editor-toolbar glass">
+        <div class="toolbar-left">
+          <button class="tool-btn" id="photoImportBtn" title="Import (Ctrl+O)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Import
+          </button>
+          <button class="tool-btn" id="photoUndoBtn" title="Undo (Ctrl+Z)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+          </button>
+          <button class="tool-btn" id="photoRedoBtn" title="Redo (Ctrl+Y)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>
+          </button>
+        </div>
+        <div class="toolbar-right">
+          <button class="tool-btn" id="photoSaveBtn" title="Save (Ctrl+S)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Save
+          </button>
+          <button class="tool-btn btn-accent" id="photoDownloadBtn" title="Export (Ctrl+D)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export
+          </button>
+        </div>
+      </div>
+
+      <!-- Editor Layout -->
+      <div class="editor-layout" id="photoEditorLayout">
+        <!-- Left Panel -->
+        <aside class="side-panel glass" id="photoPanel">
+          <div class="panel-tabs" id="photoPanelTabs">
+            <button class="ptab active" data-ptab="tools">Tools</button>
+            <button class="ptab" data-ptab="adjust">Adjust</button>
+            <button class="ptab" data-ptab="filters">Filters</button>
+            <button class="ptab" data-ptab="overlay">Overlay</button>
+          </div>
+
+          <!-- TOOLS TAB -->
+          <div class="ptab-body active" id="ptab-tools">
+            <div class="tools-grid">
+              <button class="tool-cell active" data-tool="select"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3l14 9-7 1-3 8L5 3z"/></svg><span>Select</span></button>
+              <button class="tool-cell" data-tool="crop"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg><span>Crop</span></button>
+              <button class="tool-cell" data-tool="draw"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg><span>Draw</span></button>
+              <button class="tool-cell" data-tool="eraser"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20H7L3 16l13-13 6 6-2 2"/><path d="M6 16l4 4"/></svg><span>Eraser</span></button>
+              <button class="tool-cell" data-tool="text"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg><span>Text</span></button>
+              <button class="tool-cell" data-tool="shapes"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg><span>Shape</span></button>
+              <button class="tool-cell" data-tool="sticker"><span style="font-size:17px">😊</span><span>Sticker</span></button>
+              <button class="tool-cell" data-tool="resize"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg><span>Resize</span></button>
+            </div>
+
+            <!-- Dynamic Options per Tool -->
+            <div id="toolOptionsDraw" class="tool-opts hidden">
+              <label>Color</label><input type="color" id="drawColor" value="#a78bfa" class="color-pick" />
+              <label>Brush Size: <span id="drawSizeVal">8</span>px</label>
+              <input type="range" id="drawSize" min="1" max="60" value="8" class="slider" />
+              <label>Opacity: <span id="drawOpacityVal">100</span>%</label>
+              <input type="range" id="drawOpacity" min="10" max="100" value="100" class="slider" />
+            </div>
+            <div id="toolOptionsEraser" class="tool-opts hidden">
+              <label>Size: <span id="eraserSizeVal">20</span>px</label>
+              <input type="range" id="eraserSize" min="5" max="100" value="20" class="slider" />
+            </div>
+            <div id="toolOptionsText" class="tool-opts hidden">
+              <label>Text</label>
+              <input type="text" id="textInput" placeholder="Enter text..." class="text-field" />
+              <label>Color</label>
+              <input type="color" id="textColor" value="#ffffff" class="color-pick" />
+              <label>Size: <span id="textSizeVal">28</span>px</label>
+              <input type="range" id="textSize" min="12" max="120" value="28" class="slider" />
+              <label>Font</label>
+              <select id="textFont" class="sel-field">
+                <option value="Inter">Inter</option>
+                <option value="Arial">Arial</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Impact">Impact</option>
+              </select>
+              <label>Bold</label>
+              <label class="toggle-switch"><input type="checkbox" id="textBold"/><span class="toggle-slider"></span></label>
+              <button class="btn btn-sm btn-primary w-full mt-8" id="addTextBtn">Add Text to Canvas</button>
+            </div>
+            <div id="toolOptionsShapes" class="tool-opts hidden">
+              <label>Shape</label>
+              <div class="shape-row">
+                <button class="shape-btn active" data-shape="rect">▬</button>
+                <button class="shape-btn" data-shape="circle">●</button>
+                <button class="shape-btn" data-shape="line">—</button>
+                <button class="shape-btn" data-shape="arrow">→</button>
+                <button class="shape-btn" data-shape="triangle">▲</button>
+              </div>
+              <label>Color</label>
+              <input type="color" id="shapeColor" value="#a78bfa" class="color-pick" />
+              <label>Stroke: <span id="shapeSizeVal">3</span>px</label>
+              <input type="range" id="shapeSize" min="1" max="30" value="3" class="slider" />
+              <label class="checkbox-row"><input type="checkbox" id="shapeFill"/> Fill Shape</label>
+            </div>
+            <div id="toolOptionsSticker" class="tool-opts hidden">
+              <label>Choose Sticker</label>
+              <div class="sticker-grid" id="stickerPicker"></div>
+              <label>Size: <span id="stickerSizeVal">56</span>px</label>
+              <input type="range" id="stickerSize" min="24" max="200" value="56" class="slider" />
+            </div>
+            <div id="toolOptionsResize" class="tool-opts hidden">
+              <label>Width (px)</label>
+              <input type="number" id="resizeWidth" placeholder="Width" class="text-field" min="1" max="8000" />
+              <label>Height (px)</label>
+              <input type="number" id="resizeHeight" placeholder="Height" class="text-field" min="1" max="8000" />
+              <label class="checkbox-row"><input type="checkbox" id="resizeLock" checked /> Lock Aspect Ratio</label>
+              <button class="btn btn-sm btn-primary w-full mt-8" id="applyResizeBtn">Apply Resize</button>
+            </div>
+            <div id="toolOptionsCrop" class="tool-opts hidden">
+              <label>Aspect Ratio</label>
+              <div class="ratio-row">
+                <button class="ratio-btn active" data-ratio="free">Free</button>
+                <button class="ratio-btn" data-ratio="1:1">1:1</button>
+                <button class="ratio-btn" data-ratio="16:9">16:9</button>
+                <button class="ratio-btn" data-ratio="4:3">4:3</button>
+                <button class="ratio-btn" data-ratio="9:16">9:16</button>
+              </div>
+              <button class="btn btn-sm btn-primary w-full mt-8" id="applyCropBtn">Apply Crop</button>
+              <button class="btn btn-sm btn-ghost w-full mt-4" id="cancelCropBtn">Cancel</button>
+            </div>
+
+            <!-- Transform -->
+            <div class="tool-section-title">Transform</div>
+            <div class="btn-row-2">
+              <button class="btn btn-sm btn-ghost" id="rotateLeftBtn">↺ 90°</button>
+              <button class="btn btn-sm btn-ghost" id="rotateRightBtn">↻ 90°</button>
+            </div>
+            <div class="btn-row-2 mt-6">
+              <button class="btn btn-sm btn-ghost" id="flipHBtn">↔ Flip H</button>
+              <button class="btn btn-sm btn-ghost" id="flipVBtn">↕ Flip V</button>
+            </div>
+          </div>
+
+          <!-- ADJUST TAB -->
+          <div class="ptab-body" id="ptab-adjust">
+            <div class="adj-row"><label>Brightness</label><div class="adj-ctrl"><input type="range" class="slider adj-sl" id="adj-brightness" min="-100" max="100" value="0"/><span class="adj-v" id="v-brightness">0</span><button class="adj-rst" data-reset="brightness">↺</button></div></div>
+            <div class="adj-row"><label>Contrast</label><div class="adj-ctrl"><input type="range" class="slider adj-sl" id="adj-contrast" min="-100" max="100" value="0"/><span class="adj-v" id="v-contrast">0</span><button class="adj-rst" data-reset="contrast">↺</button></div></div>
+            <div class="adj-row"><label>Saturation</label><div class="adj-ctrl"><input type="range" class="slider adj-sl" id="adj-saturation" min="-100" max="100" value="0"/><span class="adj-v" id="v-saturation">0</span><button class="adj-rst" data-reset="saturation">↺</button></div></div>
+            <div class="adj-row"><label>Hue</label><div class="adj-ctrl"><input type="range" class="slider adj-sl" id="adj-hue" min="-180" max="180" value="0"/><span class="adj-v" id="v-hue">0</span><button class="adj-rst" data-reset="hue">↺</button></div></div>
+            <div class="adj-row"><label>Blur</label><div class="adj-ctrl"><input type="range" class="slider adj-sl" id="adj-blur" min="0" max="20" value="0"/><span class="adj-v" id="v-blur">0</span><button class="adj-rst" data-reset="blur">↺</button></div></div>
+            <div class="adj-row"><label>Sharpen</label><div class="adj-ctrl"><input type="range" class="slider adj-sl" id="adj-sharpen" min="0" max="10" value="0"/><span class="adj-v" id="v-sharpen">0</span><button class="adj-rst" data-reset="sharpen">↺</button></div></div>
+            <div class="adj-row"><label>Vignette</label><div class="adj-ctrl"><input type="range" class="slider adj-sl" id="adj-vignette" min="0" max="100" value="0"/><span class="adj-v" id="v-vignette">0</span><button class="adj-rst" data-reset="vignette">↺</button></div></div>
+            <div class="adj-row"><label>Temperature</label><div class="adj-ctrl"><input type="range" class="slider adj-sl" id="adj-temperature" min="-100" max="100" value="0"/><span class="adj-v" id="v-temperature">0</span><button class="adj-rst" data-reset="temperature">↺</button></div></div>
+            <button class="btn btn-sm btn-ghost w-full mt-8" id="resetAllAdjBtn">Reset All</button>
+          </div>
+
+          <!-- FILTERS TAB -->
+          <div class="ptab-body" id="ptab-filters">
+            <div class="filters-grid">
+              <button class="filter-btn active" data-filter="none"><div class="filter-thumb" style="background:#1a1a2e">None</div><span>Original</span></button>
+              <button class="filter-btn" data-filter="grayscale"><div class="filter-thumb" style="background:linear-gradient(135deg,#555,#bbb)">B&amp;W</div><span>B&amp;W</span></button>
+              <button class="filter-btn" data-filter="sepia"><div class="filter-thumb" style="background:linear-gradient(135deg,#a0745a,#c9a97e)">Sepia</div><span>Sepia</span></button>
+              <button class="filter-btn" data-filter="vintage"><div class="filter-thumb" style="background:linear-gradient(135deg,#8b7355,#d4a76a)">Vintage</div><span>Vintage</span></button>
+              <button class="filter-btn" data-filter="vivid"><div class="filter-thumb" style="background:linear-gradient(135deg,#f87171,#34d399)">Vivid</div><span>Vivid</span></button>
+              <button class="filter-btn" data-filter="cool"><div class="filter-thumb" style="background:linear-gradient(135deg,#38bdf8,#818cf8)">Cool</div><span>Cool</span></button>
+              <button class="filter-btn" data-filter="warm"><div class="filter-thumb" style="background:linear-gradient(135deg,#fb923c,#f59e0b)">Warm</div><span>Warm</span></button>
+              <button class="filter-btn" data-filter="sketch"><div class="filter-thumb" style="background:linear-gradient(135deg,#e5e7eb,#9ca3af)">Sketch</div><span>Sketch</span></button>
+              <button class="filter-btn" data-filter="cartoon"><div class="filter-thumb" style="background:linear-gradient(135deg,#fbbf24,#f472b6)">Cartoon</div><span>Cartoon</span></button>
+              <button class="filter-btn" data-filter="invert"><div class="filter-thumb" style="background:linear-gradient(135deg,#111,#eee)">Inv</div><span>Invert</span></button>
+              <button class="filter-btn" data-filter="chrome"><div class="filter-thumb" style="background:linear-gradient(135deg,#94a3b8,#e2e8f0)">Chr</div><span>Chrome</span></button>
+              <button class="filter-btn" data-filter="fade"><div class="filter-thumb" style="background:linear-gradient(135deg,#94a3b8,#fff,#94a3b8)">Fade</div><span>Fade</span></button>
+            </div>
+          </div>
+
+          <!-- OVERLAY TAB -->
+          <div class="ptab-body" id="ptab-overlay">
+            <label>Blend Mode</label>
+            <select id="blendMode" class="sel-field">
+              <option value="normal">Normal</option><option value="multiply">Multiply</option>
+              <option value="screen">Screen</option><option value="overlay">Overlay</option>
+              <option value="darken">Darken</option><option value="lighten">Lighten</option>
+              <option value="color-dodge">Color Dodge</option><option value="soft-light">Soft Light</option>
+            </select>
+            <label style="margin-top:12px">Overlay Color</label>
+            <input type="color" id="overlayColor" value="#a78bfa" class="color-pick" />
+            <label>Opacity: <span id="overlayOpacityVal">0</span>%</label>
+            <input type="range" id="overlayOpacity" min="0" max="100" value="0" class="slider" />
+            <button class="btn btn-sm btn-primary w-full mt-8" id="applyOverlayBtn">Apply Overlay</button>
+          </div>
+        </aside>
+
+        <!-- Canvas Area -->
+        <div class="canvas-area" id="photoCanvasArea">
+          <div class="drop-zone" id="photoDropZone">
+            <div class="drop-icon">🖼️</div>
+            <h3>Drop image here</h3>
+            <p>or click Import above</p>
+            <button class="btn btn-primary mt-8" onclick="document.getElementById('photoImportBtn').click()">Import Image</button>
+            <p class="hint">Supports: JPG, PNG, WebP, GIF, BMP</p>
+          </div>
+          <div class="canvas-container hidden" id="photoCanvasContainer">
+            <canvas id="photoCanvas"></canvas>
+            <canvas id="drawCanvas"></canvas>
+            <div class="crop-overlay hidden" id="cropOverlay">
+              <div class="crop-box" id="cropBox">
+                <div class="crop-handle tl"></div>
+                <div class="crop-handle tr"></div>
+                <div class="crop-handle bl"></div>
+                <div class="crop-handle br"></div>
+              </div>
+            </div>
+          </div>
+          <div class="canvas-controls hidden" id="photoControls">
+            <button class="ctrl-btn" id="photoZoomOut">−</button>
+            <span class="zoom-level" id="photoZoom">100%</span>
+            <button class="ctrl-btn" id="photoZoomIn">+</button>
+            <button class="ctrl-btn" id="photoFit">⊡ Fit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Download Modal -->
+      <div class="modal-backdrop hidden" id="dlModal">
+        <div class="modal glass">
+          <h3>Export Image</h3>
+          <label>Format</label>
+          <div class="fmt-row">
+            <button class="fmt-btn active" data-fmt="png">PNG</button>
+            <button class="fmt-btn" data-fmt="jpeg">JPG</button>
+            <button class="fmt-btn" data-fmt="webp">WebP</button>
+          </div>
+          <div id="qualityGroup">
+            <label>Quality: <span id="qualityVal">90</span>%</label>
+            <input type="range" id="qualitySlider" min="10" max="100" value="90" class="slider" />
+          </div>
+          <div class="modal-btns">
+            <button class="btn btn-ghost" id="cancelDl">Cancel</button>
+            <button class="btn btn-secondary" id="shareDl" style="display:none">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              Share
+            </button>
+            <button class="btn btn-primary" id="confirmDl">Download</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VIDEO EDITOR SCREEN ===== -->
+    <section class="screen" id="screen-video">
+      <!-- Toolbar -->
+      <div class="editor-toolbar glass">
+        <div class="toolbar-left">
+          <button class="tool-btn" id="videoImportBtn" title="Import Video">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Import
+          </button>
+          <button class="tool-btn" id="videoUndoBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>
+          </button>
+          <button class="tool-btn" id="videoRedoBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>
+          </button>
+        </div>
+        <div class="toolbar-right">
+          <button class="tool-btn" id="videoCaptureBtn" title="Capture Frame">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Capture
+          </button>
+          <button class="tool-btn" id="videoShareFrameBtn" title="Share Frame" style="display:none">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share
+          </button>
+          <button class="tool-btn" id="videoSaveBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+            Save
+          </button>
+          <button class="tool-btn btn-accent" id="videoExportBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export
+          </button>
+        </div>
+      </div>
+
+      <!-- Video Layout -->
+      <div class="editor-layout video-layout">
+        <!-- Preview -->
+        <div class="video-preview-wrap">
+          <div class="drop-zone" id="videoDropZone">
+            <div class="drop-icon">🎬</div>
+            <h3>Drop video here</h3>
+            <p>or click Import above</p>
+            <button class="btn btn-primary mt-8" onclick="document.getElementById('videoImportBtn').click()">Import Video</button>
+            <p class="hint">Supports: MP4, WebM, MOV</p>
+          </div>
+          <div class="video-wrap hidden" id="videoWrap">
+            <div class="video-player-box" id="videoPlayerBox">
+              <video id="videoPlayer" playsinline></video>
+              <div id="videoOverlaysContainer" class="video-overlays"></div>
+            </div>
+            <!-- Controls -->
+            <div class="vctrls glass">
+              <div class="time-row">
+                <span id="vidCurrentTime">0:00</span>
+                <input type="range" id="videoSeek" class="seek-slider" min="0" max="100" value="0" step="0.01"/>
+                <span id="vidTotalTime">0:00</span>
+              </div>
+              <div class="vbtn-row">
+                <button class="vbtn" id="skipBackBtn" title="−5s">«</button>
+                <button class="vbtn play-btn" id="videoPlayBtn">
+                  <svg id="playIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <svg id="pauseIcon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="hidden"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                </button>
+                <button class="vbtn" id="skipFwdBtn" title="+5s">»</button>
+                <button class="vbtn" id="muteBtn">
+                  <svg id="volIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  <svg id="muteIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                </button>
+                <input type="range" id="volumeSlider" class="vol-slider" min="0" max="1" step="0.05" value="1"/>
+                <select id="speedSelect" class="speed-sel">
+                  <option value="0.25">0.25x</option><option value="0.5">0.5x</option>
+                  <option value="0.75">0.75x</option><option value="1" selected>1x</option>
+                  <option value="1.5">1.5x</option><option value="2">2x</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline -->
+          <div class="timeline-wrap hidden glass" id="timelineWrap">
+            <div class="tl-header">
+              <span class="tl-title">Timeline</span>
+              <div class="tl-ctrl">
+                <button class="ctrl-btn" id="tlZoomOut">−</button>
+                <span id="tlZoom">1x</span>
+                <button class="ctrl-btn" id="tlZoomIn">+</button>
+              </div>
+            </div>
+            <div class="tl-body">
+              <div class="tl-ruler" id="tlRuler"></div>
+              <div class="tl-track-row">
+                <span class="tl-track-lbl">Video</span>
+                <div class="tl-track" id="videoTrack"></div>
+              </div>
+              <div class="tl-track-row">
+                <span class="tl-track-lbl">Audio</span>
+                <div class="tl-track" id="audioTrack"></div>
+              </div>
+              <div class="tl-playhead" id="tlPlayhead"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Panel -->
+        <aside class="side-panel glass" id="videoPanel">
+          <div class="panel-tabs" id="videoPanelTabs">
+            <button class="ptab active" data-vtab="trim">Trim</button>
+            <button class="ptab" data-vtab="overlay">Overlay</button>
+            <button class="ptab" data-vtab="effects">Effects</button>
+            <button class="ptab" data-vtab="clips">Clips</button>
+          </div>
+
+          <!-- TRIM TAB -->
+          <div class="vtab-body active" id="vtab-trim">
+            <label>Trim Start: <span id="trimStartVal">0.0s</span></label>
+            <input type="range" id="trimStart" class="slider" min="0" max="100" value="0" step="0.1"/>
+            <label>Trim End: <span id="trimEndVal">—</span></label>
+            <input type="range" id="trimEnd" class="slider" min="0" max="100" value="100" step="0.1"/>
+            <div class="trim-preview">
+              <div class="trim-bar-bg"><div class="trim-bar-fill" id="trimBarFill"></div></div>
+            </div>
+            <div class="btn-row-2 mt-8">
+              <button class="btn btn-sm btn-primary" id="applyTrimBtn">Apply Trim</button>
+              <button class="btn btn-sm btn-ghost" id="resetTrimBtn">Reset</button>
+            </div>
+
+            <div class="tool-section-title mt-12">Speed</div>
+            <div class="speed-chips">
+              <button class="speed-chip" data-speed="0.5">0.5x</button>
+              <button class="speed-chip active" data-speed="1">1x</button>
+              <button class="speed-chip" data-speed="1.5">1.5x</button>
+              <button class="speed-chip" data-speed="2">2x</button>
+            </div>
+
+            <div class="tool-section-title mt-12">Volume</div>
+            <label>Volume: <span id="volumeValDisplay">100</span>%</label>
+            <input type="range" id="volumePanel" class="slider" min="0" max="100" value="100"/>
+            <label class="checkbox-row mt-6"><input type="checkbox" id="muteCheck"/> Mute Video</label>
+
+            <div class="tool-section-title mt-12">Reverse</div>
+            <p style="font-size:11px;color:var(--text-muted)">Simulate reverse playback</p>
+            <button class="btn btn-sm btn-ghost w-full mt-4" id="reverseBtn">↩ Toggle Reverse</button>
+          </div>
+
+          <!-- OVERLAY TAB -->
+          <div class="vtab-body" id="vtab-overlay">
+            <label>Add Text</label>
+            <input type="text" id="videoTextInput" placeholder="Enter text..." class="text-field"/>
+            <label>Color</label>
+            <input type="color" id="videoTextColor" value="#ffffff" class="color-pick"/>
+            <label>Font Size: <span id="videoTextSizeVal">28</span>px</label>
+            <input type="range" id="videoTextSize" min="14" max="100" value="28" class="slider"/>
+            <label class="checkbox-row"><input type="checkbox" id="videoTextBg"/> Background</label>
+            <button class="btn btn-sm btn-primary w-full mt-8" id="addVideoTextBtn">Add Text Overlay</button>
+
+            <div class="tool-section-title mt-12">Stickers</div>
+            <div class="sticker-grid" id="videoStickerPicker"></div>
+
+            <div class="tool-section-title mt-12">Active Overlays</div>
+            <div id="activeOverlaysList"><p style="font-size:12px;color:var(--text-muted)">None added</p></div>
+          </div>
+
+          <!-- EFFECTS TAB -->
+          <div class="vtab-body" id="vtab-effects">
+            <div class="tool-section-title">Video Filter</div>
+            <div class="effects-chips">
+              <button class="effect-chip active" data-vfx="none">None</button>
+              <button class="effect-chip" data-vfx="grayscale">B&amp;W</button>
+              <button class="effect-chip" data-vfx="sepia">Sepia</button>
+              <button class="effect-chip" data-vfx="vintage">Vintage</button>
+              <button class="effect-chip" data-vfx="vivid">Vivid</button>
+              <button class="effect-chip" data-vfx="cool">Cool</button>
+              <button class="effect-chip" data-vfx="warm">Warm</button>
+              <button class="effect-chip" data-vfx="invert">Invert</button>
+            </div>
+            <div class="tool-section-title mt-12">Transitions</div>
+            <div class="effects-chips">
+              <button class="trans-chip active" data-trans="none">None</button>
+              <button class="trans-chip" data-trans="fade">Fade In</button>
+              <button class="trans-chip" data-trans="slide">Slide</button>
+              <button class="trans-chip" data-trans="zoom">Zoom</button>
+            </div>
+          </div>
+
+          <!-- CLIPS TAB -->
+          <div class="vtab-body" id="vtab-clips">
+            <div id="clipsList"><p style="font-size:12px;color:var(--text-muted)">Import a video to see clips</p></div>
+            <button class="btn btn-sm btn-ghost w-full mt-8" id="addClipBtn">+ Add Clip</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS SCREEN ===== -->
+    <section class="screen" id="screen-projects">
+      <div class="projects-header glass">
+        <h2>My Projects</h2>
+        <div class="projects-toolbar">
+          <input type="search" id="projectSearch" class="search-input" placeholder="Search projects..."/>
+          <div class="view-btns">
+            <button class="view-btn active" id="gridViewBtn" data-view="grid">⊞</button>
+            <button class="view-btn" id="listViewBtn" data-view="list">☰</button>
+          </div>
+        </div>
+      </div>
+      <div class="projects-grid" id="projectsGrid">
+        <div class="empty-state glass" style="grid-column:1/-1">
+          <div class="empty-icon">📁</div>
+          <h3>No projects yet</h3>
+          <p>Start editing to create your first project</p>
+          <div class="hero-actions mt-12">
+            <button class="btn btn-primary" onclick="app.navigate('photo')">Edit Photo</button>
+            <button class="btn btn-secondary" onclick="app.navigate('video')">Edit Video</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SETTINGS SCREEN ===== -->
+    <section class="screen" id="screen-settings">
+      <div class="settings-wrap">
+        <div class="settings-card glass">
+          <h3 class="settings-heading">Appearance</h3>
+          <div class="setting-row">
+            <div><strong>Theme</strong><p>Dark or Light mode</p></div>
+            <div class="theme-toggle-row">
+              <button class="theme-opt active" data-theme="dark">🌙 Dark</button>
+              <button class="theme-opt" data-theme="light">☀️ Light</button>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div><strong>Accent Color</strong><p>Customize UI color</p></div>
+            <div class="accent-row">
+              <button class="accent-btn active" data-accent="#a78bfa" style="background:#a78bfa"></button>
+              <button class="accent-btn" data-accent="#38bdf8" style="background:#38bdf8"></button>
+              <button class="accent-btn" data-accent="#34d399" style="background:#34d399"></button>
+              <button class="accent-btn" data-accent="#fb923c" style="background:#fb923c"></button>
+              <button class="accent-btn" data-accent="#f472b6" style="background:#f472b6"></button>
+              <button class="accent-btn" data-accent="#facc15" style="background:#facc15"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-card glass">
+          <h3 class="settings-heading">Editor</h3>
+          <div class="setting-row"><div><strong>Auto Save</strong><p>Save after each edit</p></div><label class="toggle-switch"><input type="checkbox" id="autoSaveToggle" checked/><span class="toggle-slider"></span></label></div>
+          <div class="setting-row"><div><strong>High Quality Export</strong><p>Maximum quality</p></div><label class="toggle-switch"><input type="checkbox" id="hqExportToggle" checked/><span class="toggle-slider"></span></label></div>
+          <div class="setting-row"><div><strong>Show Grid</strong><p>Grid overlay in editor</p></div><label class="toggle-switch"><input type="checkbox" id="gridToggle"/><span class="toggle-slider"></span></label></div>
+        </div>
+
+        <div class="settings-card glass">
+          <h3 class="settings-heading">Keyboard Shortcuts</h3>
+          <div class="shortcuts-grid-view">
+            <div class="shortcut-row"><kbd>Ctrl+Z</kbd><span>Undo</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+Y</kbd><span>Redo</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+O</kbd><span>Import</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+S</kbd><span>Save</span></div>
+            <div class="shortcut-row"><kbd>Ctrl+D</kbd><span>Export</span></div>
+            <div class="shortcut-row"><kbd>C</kbd><span>Crop</span></div>
+            <div class="shortcut-row"><kbd>D</kbd><span>Draw</span></div>
+            <div class="shortcut-row"><kbd>E</kbd><span>Eraser</span></div>
+            <div class="shortcut-row"><kbd>T</kbd><span>Text</span></div>
+            <div class="shortcut-row"><kbd>Space</kbd><span>Play/Pause</span></div>
+            <div class="shortcut-row"><kbd>/</kbd><span>Search</span></div>
+            <div class="shortcut-row"><kbd>Esc</kbd><span>Cancel</span></div>
+          </div>
+        </div>
+
+        <div class="settings-card glass">
+          <h3 class="settings-heading">Storage</h3>
+          <div class="setting-row"><div><strong>Projects Saved</strong><span id="projectCountDisplay" style="color:var(--text-muted);font-size:13px">0 projects</span></div></div>
+          <div class="setting-row"><div><strong>Storage Used</strong><span id="storageUsedDisplay" style="color:var(--text-muted);font-size:13px">Calculating…</span></div></div>
+          <button class="btn btn-sm btn-destructive mt-8" id="clearStorageBtn">Clear All Projects</button>
+        </div>
+
+        <div class="settings-card glass">
+          <h3 class="settings-heading">About</h3>
+          <div class="about-row">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="url(#aLg)" stroke-width="2" stroke-linecap="round"/><defs><linearGradient id="aLg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient></defs></svg>
+            <div>
+              <strong>Nova Edit Lite v1.0</strong>
+              <p style="font-size:12px;color:var(--text-muted)">100% browser-based • No API keys • No cloud</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav glass">
+    <button class="nav-item active" data-nav="home" onclick="app.navigate('home')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="nav-item" data-nav="photo" onclick="app.navigate('photo')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>Photo</span>
+    </button>
+    <button class="nav-item nav-center-btn" data-nav="video" onclick="app.navigate('video')">
+      <div class="nav-center-disc">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+      </div>
+      <span>Video</span>
+    </button>
+    <button class="nav-item" data-nav="projects" onclick="app.navigate('projects')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      <span>Projects</span>
+    </button>
+    <button class="nav-item" data-nav="settings" onclick="app.navigate('settings')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M4.93 4.93l1.41 1.41M20 12h2M2 12h2M12 20v2M12 2v2"/></svg>
+      <span>Settings</span>
+    </button>
+  </nav>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Hidden Inputs -->
+  <input type="file" id="photoFileInput" accept="image/*" style="display:none"/>
+  <input type="file" id="videoFileInput" accept="video/*" style="display:none"/>
+  <input type="file" id="addClipInput" accept="video/*" style="display:none"/>
+</div>
+
+<script type="module" src="src/js/storage.js"></script>
+<script type="module" src="src/js/utils.js"></script>
+<script type="module" src="src/js/photo-editor.js"></script>
+<script type="module" src="src/js/video-editor.js"></script>
+<script type="module" src="src/js/app.js"></script>
+<script type="module" src="src/js/capacitor-init.js"></script>
+</body>
+</html>

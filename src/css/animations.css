@@ -1,0 +1,220 @@
+/* ============================================
+   NOVA EDIT LITE — Animations
+   ============================================ */
+
+/* ---- Keyframes ---- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInBottom {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(10px, -15px) scale(1.05); }
+  66%  { transform: translate(-8px, 8px) scale(0.97); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toastSlideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(40px); }
+}
+
+@keyframes ripple {
+  to { transform: scale(3); opacity: 0; }
+}
+
+/* ---- Applied Animations ---- */
+
+/* Hero orbs float effect */
+.orb-1 { animation: orbFloat 8s ease-in-out infinite; }
+.orb-2 { animation: orbFloat 10s ease-in-out infinite reverse; animation-delay: -3s; }
+.orb-3 { animation: orbFloat 7s ease-in-out infinite; animation-delay: -1.5s; }
+
+/* Screen transitions */
+.screen { transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Home screen elements */
+.hero-badge { animation: fadeInDown 0.5s ease both; }
+.hero-title { animation: fadeInUp 0.5s ease 0.1s both; }
+.hero-sub   { animation: fadeInUp 0.5s ease 0.2s both; }
+.hero-actions { animation: fadeInUp 0.5s ease 0.3s both; }
+
+/* Quick cards stagger */
+.quick-card:nth-child(1) { animation: fadeInUp 0.4s ease 0.1s both; }
+.quick-card:nth-child(2) { animation: fadeInUp 0.4s ease 0.15s both; }
+.quick-card:nth-child(3) { animation: fadeInUp 0.4s ease 0.2s both; }
+.quick-card:nth-child(4) { animation: fadeInUp 0.4s ease 0.25s both; }
+
+/* Toast */
+.toast { animation: toastSlideIn 0.3s ease forwards; }
+.toast.removing { animation: toastSlideOut 0.25s ease forwards; }
+
+/* Modal */
+.modal { animation: scaleIn 0.25s ease; }
+.modal-backdrop { animation: fadeIn 0.2s ease; }
+
+/* Panel tabs content */
+.ptab-body.active, .vtab-body.active { animation: fadeIn 0.2s ease; }
+
+/* Tool cells hover scale */
+.tool-cell { transition: all 0.15s ease; }
+.tool-cell:active { transform: scale(0.94); }
+
+/* Buttons */
+.btn { transition: all 0.15s ease; }
+.btn:active { transform: scale(0.96); }
+
+/* Filter/effect buttons */
+.filter-btn { transition: all 0.2s ease; }
+.filter-btn:hover { transform: translateY(-2px); }
+
+/* Nav items */
+.nav-item { transition: color 0.2s ease, background 0.2s ease; }
+.nav-item.active svg { animation: pulse 2.5s ease-in-out infinite; }
+
+/* Canvas controls hover */
+.ctrl-btn { transition: all 0.15s ease; }
+.ctrl-btn:active { transform: scale(0.92); }
+
+/* Skeleton loading shimmer */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* Loading spinner */
+.spinner {
+  width: 24px; height: 24px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* Drag-over pulse */
+.drop-zone.drag-over {
+  animation: pulse 1s ease-in-out infinite;
+}
+
+/* Playhead indicator */
+.tl-playhead { transition: left 0.05s linear; }
+
+/* Import button pulse on empty state */
+@keyframes importPulse {
+  0%, 100% { box-shadow: 0 4px 16px var(--accent-glow); }
+  50%       { box-shadow: 0 4px 28px var(--accent-glow); }
+}
+.drop-zone .btn-primary { animation: importPulse 2s ease-in-out infinite; }
+
+/* Sticker hover bounce */
+.sticker-item { transition: transform 0.15s ease; }
+.sticker-item:hover { transform: scale(1.2) rotate(-5deg); }
+
+/* Project card flip on action */
+.project-card { transition: all 0.2s ease; }
+.project-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+
+/* Accent color transition */
+:root, [data-theme] { transition: --accent 0.3s; }
+
+/* Crop box animated border */
+.crop-box {
+  animation: cropPulse 1.5s ease-in-out infinite;
+}
+@keyframes cropPulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  50%       { box-shadow: 0 0 0 6px var(--accent-glow); }
+}
+
+/* Slider thumb glow on active */
+.slider:active::-webkit-slider-thumb { box-shadow: 0 0 0 6px var(--accent-glow); }
+
+/* Quick card ripple */
+.quick-card { overflow: hidden; }
+.quick-card:active { transform: scale(0.97); }
+
+/* Search overlay */
+.search-overlay { animation: fadeIn 0.2s ease; }
+.search-box { animation: fadeInDown 0.25s ease; }
+
+/* Video filter transition */
+#videoPlayer { transition: filter 0.4s ease; }
+
+/* Timeline zoom smooth */
+.tl-track, .tl-ruler { transition: width 0.3s ease; }
+
+/* Accent button glow pulse */
+.btn-accent { position: relative; overflow: hidden; }
+.btn-accent::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--accent), #38bdf8);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+  filter: blur(8px);
+}
+.btn-accent:hover::after { opacity: 0.4; }
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
