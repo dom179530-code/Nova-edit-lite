@@ -4,9 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --config vite.config.ts --host 0.0.0.0",
-    "build:android": "vite build --config vite.android.config.js",
-    "android:apk": "bash scripts/build-android.sh"
+    "build:android": "vite build --config vite.android.config.js"
   },
   "dependencies": {
     "@capacitor/action-sheet": "^8.1.1",
