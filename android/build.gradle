@@ -6,7 +6,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.7.3'
-        classpath 'com.google.gms:google-services:4.4.2'
     }
 }
 
@@ -16,6 +15,12 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+    }
+    configurations.all {
+        resolutionStrategy {
+            // Force a modern version of error_prone_annotations that's on Maven Central
+            force 'com.google.errorprone:error_prone_annotations:2.26.1'
+        }
     }
 }
 
