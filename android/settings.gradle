@@ -1,6 +1,2 @@
+rootProject.name = 'nova-edit-lite'
 include ':app'
-include ':capacitor-android'
-include ':capacitor-cordova-android-plugins'
-
-project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android/capacitor')
-project(':capacitor-cordova-android-plugins').projectDir = new File('../capacitor-cordova-android-plugins/')
