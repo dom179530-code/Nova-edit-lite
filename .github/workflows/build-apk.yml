@@ -8,9 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: artifacts/nova-edit-lite
 
     steps:
       - name: Checkout code
@@ -22,7 +19,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install --prefix .
+        run: npm install
 
       - name: Build web assets for Android
         run: npx vite build --config vite.android.config.js
@@ -41,7 +38,6 @@ jobs:
 
       - name: Install Android build tools
         run: sdkmanager "platforms;android-35" "build-tools;35.0.1"
-        working-directory: .
 
       - name: Make gradlew executable
         run: chmod +x android/gradlew
@@ -56,7 +52,7 @@ jobs:
 
       - name: Build debug APK
         run: ./gradlew assembleDebug --no-daemon
-        working-directory: artifacts/nova-edit-lite/android
+        working-directory: android
         env:
           ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
 
@@ -64,12 +60,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: nova-edit-lite-debug-apk
-          path: artifacts/nova-edit-lite/android/app/build/outputs/apk/debug/app-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
       - name: APK info
         if: always()
-        working-directory: .
         run: |
-          APK=artifacts/nova-edit-lite/android/app/build/outputs/apk/debug/app-debug.apk
-          [ -f "$APK" ] && echo "✅ APK: $(du -sh $APK | cut -f1)" || echo "APK not found"
+          APK=android/app/build/outputs/apk/debug/app-debug.apk
+          [ -f "$APK" ] && echo "APK built: $(du -sh $APK | cut -f1)" || echo "APK not found"
