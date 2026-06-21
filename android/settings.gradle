@@ -1,8 +1,6 @@
 include ':app'
-
-// capacitor-android lives in node_modules after npm install
-project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android/capacitor')
-
-// cordova-plugins is our local minimal stub (no cordova plugins used)
+include ':capacitor-android'
 include ':capacitor-cordova-android-plugins'
+
+project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/android/capacitor')
 project(':capacitor-cordova-android-plugins').projectDir = new File('../capacitor-cordova-android-plugins/')
