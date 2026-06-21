@@ -22,8 +22,8 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install
-        working-directory: .
+        run: pnpm install --no-frozen-lockfile
+        working-directory: artifacts/nova-edit-lite
 
       - name: Build web assets for Android
         run: npx vite build --config vite.android.config.ts
@@ -42,8 +42,7 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Install Android build tools
-        run: |
-          sdkmanager "platforms;android-35" "build-tools;35.0.1"
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.1"
 
       - name: Make gradlew executable
         run: chmod +x android/gradlew
@@ -51,12 +50,16 @@ jobs:
 
       - name: Download Gradle wrapper JAR
         run: |
-          curl -sL "https://github.com/gradle/gradle/raw/v8.11.1/gradle/wrapper/gradle-wrapper.jar" \
-            -o android/gradle/wrapper/gradle-wrapper.jar
+          mkdir -p android/gradle/wrapper
+          curl -sL "https://services.gradle.org/distributions/gradle-8.11.1-bin.zip" -o /tmp/gradle.zip
+          unzip -q /tmp/gradle.zip -d /tmp/gradle-extract
+          cp $(find /tmp/gradle-extract -name "gradle-wrapper.jar" | head -1) \
+             android/gradle/wrapper/gradle-wrapper.jar
+          echo "Gradle wrapper JAR: $(du -sh android/gradle/wrapper/gradle-wrapper.jar | cut -f1)"
         working-directory: artifacts/nova-edit-lite
 
       - name: Build debug APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
         working-directory: artifacts/nova-edit-lite/android
         env:
           ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
