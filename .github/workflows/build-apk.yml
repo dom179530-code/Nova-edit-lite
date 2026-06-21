@@ -18,16 +18,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install pnpm
-        run: npm install -g pnpm
-
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
-        working-directory: artifacts/nova-edit-lite
+        run: npm install
 
       - name: Build web assets for Android
-        run: npx vite build --config vite.android.config.ts
-        working-directory: artifacts/nova-edit-lite
+        run: npx vite build --config vite.android.config.js
         env:
           PORT: 3000
           BASE_PATH: /
@@ -46,7 +41,6 @@ jobs:
 
       - name: Make gradlew executable
         run: chmod +x android/gradlew
-        working-directory: artifacts/nova-edit-lite
 
       - name: Download Gradle wrapper JAR
         run: |
@@ -55,12 +49,11 @@ jobs:
           unzip -q /tmp/gradle.zip -d /tmp/gradle-extract
           cp $(find /tmp/gradle-extract -name "gradle-wrapper.jar" | head -1) \
              android/gradle/wrapper/gradle-wrapper.jar
-          echo "Gradle wrapper JAR: $(du -sh android/gradle/wrapper/gradle-wrapper.jar | cut -f1)"
-        working-directory: artifacts/nova-edit-lite
+          echo "Gradle wrapper: $(du -sh android/gradle/wrapper/gradle-wrapper.jar | cut -f1)"
 
       - name: Build debug APK
-        run: ./gradlew assembleDebug --no-daemon --stacktrace
-        working-directory: artifacts/nova-edit-lite/android
+        run: ./gradlew assembleDebug --no-daemon
+        working-directory: android
         env:
           ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
 
@@ -68,13 +61,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: nova-edit-lite-debug-apk
-          path: artifacts/nova-edit-lite/android/app/build/outputs/apk/debug/app-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
       - name: Show APK info
+        if: always()
         run: |
-          APK=artifacts/nova-edit-lite/android/app/build/outputs/apk/debug/app-debug.apk
+          APK=android/app/build/outputs/apk/debug/app-debug.apk
           if [ -f "$APK" ]; then
-            echo "✅ APK built successfully!"
-            echo "Size: $(du -sh $APK | cut -f1)"
+            echo "APK built! Size: $(du -sh $APK | cut -f1)"
           fi
