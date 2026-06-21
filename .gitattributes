@@ -1,0 +1,6 @@
+# Binary files — must not be modified by git
+*.jar binary
+*.apk binary
+*.png binary
+*.jpg binary
+*.ico binary
