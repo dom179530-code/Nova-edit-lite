@@ -1,0 +1,34 @@
+{
+  "name": "@workspace/nova-edit-lite",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --config vite.config.ts --host 0.0.0.0",
+    "build": "vite build --config vite.config.ts",
+    "build:android": "vite build --config vite.android.config.ts",
+    "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "android:build": "npm run build:android && npx cap sync android",
+    "android:open": "npx cap open android",
+    "android:sync": "npx cap sync android",
+    "android:apk": "bash scripts/build-android.sh",
+    "android:release": "bash scripts/build-release.sh"
+  },
+  "dependencies": {
+    "@capacitor/action-sheet": "^8.1.1",
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/camera": "^8.2.0",
+    "@capacitor/cli": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/haptics": "^8.0.2",
+    "@capacitor/share": "^8.0.1",
+    "@capacitor/splash-screen": "^8.0.1",
+    "@capacitor/status-bar": "^8.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "vite": "^6.3.5",
+    "typescript": "^5.8.3"
+  }
+}
